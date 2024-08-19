@@ -1,0 +1,11 @@
+{
+    "name": "Dealmaker",
+    "arena": "Warehouse",
+    "spawn": 0,
+    "seed": 1,
+    "nonaggressive": true,
+    "class": "Ambulant",
+    "win": "bring",
+    "item": "Spear",
+    "win2": "tame"
+}

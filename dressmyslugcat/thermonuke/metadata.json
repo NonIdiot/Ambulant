@@ -1,0 +1,31 @@
+{
+  "id": "nassoc.thermonuke",
+  "name": "Thermonuclear Bomb",
+  "author": "nonAssociatedIdiot",
+  "defaults": {
+    "FACE": {
+      "Color": "#ffffff"
+    },
+    "TAIL": {
+      "Color": "#000000"
+    },
+    "HEAD": {
+      "Color": "#000000"
+    },
+    "ARMS": {
+      "Color": "#000000"
+    },
+    "BODY": {
+      "Color": "#000000"
+    },
+    "HIPS": {
+      "Color": "#000000"
+    },
+    "LEGS": {
+      "Color": "#000000"
+    },
+    "PIXEL": {
+      "Color": "#000000"
+    }
+  }
+}

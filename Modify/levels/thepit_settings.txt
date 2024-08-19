@@ -1,0 +1,3 @@
+[MERGE]
+PlacedObjects: LanternOnStick><752.3264><253.9008><16~-185, 
+[ENDMERGE]

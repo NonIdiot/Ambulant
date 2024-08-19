@@ -1,0 +1,31 @@
+{
+  "id": "nassoc.ambulant",
+  "name": "The Ambulant",
+  "author": "nonAssociatedIdiot",
+  "defaults": {
+    "FACE": {
+      "Color": "#000000"
+    },
+    "TAIL": {
+      "Color": "#b03b27"
+    },
+    "HEAD": {
+      "Color": "#b36254"
+    },
+    "ARMS": {
+      "Color": "#b03b27"
+    },
+    "BODY": {
+      "Color": "#b03b27"
+    },
+    "HIPS": {
+      "Color": "#b03b27"
+    },
+    "LEGS": {
+      "Color": "#b03b27"
+    },
+    "PIXEL": {
+      "Color": "#b03b27"
+    }
+  }
+}

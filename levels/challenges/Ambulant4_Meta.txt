@@ -1,0 +1,10 @@
+{
+    "name": "Sharp Teeth",
+    "arena": "waterworks",
+    "spawn": 0,
+    "seed": 2,
+    "class": "Ambulant",
+    "win": "point",
+    "points": 7,
+    "rain_time": 420
+}

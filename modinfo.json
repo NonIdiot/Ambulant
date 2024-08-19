@@ -1,0 +1,12 @@
+{
+	"id": "nassoc.ambulant",
+	"name": "The Ambulant (DMS)",
+	"version": "0.0.1",
+	"hide_version": false,
+	"authors": "nonAssociatedIdiot",
+	"description": "He.",
+	"requirements": ["dressmyslugcat","slime-cubed.slugbase","moreslugcats"],
+	"requirements_names": ["Dress My Slugcat","SlugBase","More Slugcats"],
+	"checksum_override_version": false,
+	"tags": ["Cosmetics"]
+}

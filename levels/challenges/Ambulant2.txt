@@ -1,0 +1,1 @@
+SELECTED<sbB>0<sbA>CONFIG<sbB>0<sbB>200<sbC>1200<sbC>StandardGroundCreature-DataPearl-0<sbC>ID.-1.3000<sbB>723.6751<sbC>303.6951<sbC>Scavenger-Creature-0<sbC>ID.-1.3000<sbB>1274<sbC>304<sbC>Scavenger-Creature-0<sbC>ID.-1.3001<sbB>151<sbC>161<sbC>Scavenger-Creature-0<sbC>ID.-1.-273819595<sbB><sbA>
