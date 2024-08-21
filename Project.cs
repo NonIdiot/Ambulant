@@ -94,7 +94,7 @@ namespace Ambulant
                 );
                 c2.GotoPrev(MoveType.Before, x => x.MatchLdlocs(9));
                 // okay now we can finish by directing to where we send the code off to if player has reduced tech
-                c.Emit(OpCodes.Brfalse, c2.Next);
+                c.Emit(OpCodes.Brtrue, c2.Next);
                 // UnityEngine.Debug.Log(il);
             }
             catch (Exception e) { UnityEngine.Debug.Log(e); }
