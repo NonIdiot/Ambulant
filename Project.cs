@@ -75,7 +75,6 @@ namespace Ambulant
                 c.GotoPrev(MoveType.Before, x => x.MatchLdloc(13));
 
                 c.MoveAfterLabels();
-                c.Emit(OpCodes.Ldarg, 0);
                 c.EmitDelegate<Func<Player, bool>>((Player self) =>
                 {
                     var returner = false;
@@ -84,6 +83,8 @@ namespace Ambulant
                     }
                     return returner;
                 });
+                c.Emit(OpCodes.LdcR4, 0.0f);
+                c.Emit(OpCodes.Beq, "IL_1F88");
                 // UnityEngine.Debug.Log(il);
             }
             catch (Exception e) { UnityEngine.Debug.Log(e); }
