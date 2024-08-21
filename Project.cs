@@ -9,6 +9,8 @@ using BepInEx.Logging;
 using SlugBase.SaveData;
 using SlugBase.Features;
 using static SlugBase.Features.FeatureTypes;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 
 namespace Ambulant
 {
@@ -21,11 +23,12 @@ namespace Ambulant
         public static readonly PlayerFeature<bool> SwallowOnlyPearls = PlayerBool("ambulant/swallow_only_pearls");
         public void OnEnable()
         {
-            Logger.LogDebug("OnEnable start");
+            Logger.LogDebug("Ambulant's Plugin loading...");
             //On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 
             On.Player.CanBeSwallowed += canSwallowThis;
-            Logger.LogDebug("OnEnable end");
+            IL.Player.UpdateBodyMode += playerUpdateBody;
+            Logger.LogDebug("Ambulant's Plugin successfully loaded!");
         }
 
         private void OnDisable()
@@ -55,6 +58,32 @@ namespace Ambulant
                 }
             }
             return isTrue;
+        }
+
+        private void playerUpdateBody(ILContext il)
+        {
+            try
+            {
+                ILCursor c = new ILCursor(il);
+                // thank you so much jacob_v_thaumiel and alphappy on discord you are so awesome
+                c.GotoNext(
+                    MoveType.After,
+                    x => x.MatchLdlocs(13),
+                    x => x.MatchLdfld(typeof(Vector2).GetField(nameof(Vector2.x))),
+                    x => x.MatchLdcR4(0.0f),
+                    x => x.MatchCallOrCallvirt(typeof(ExtEnum<SlugcatStats.Name>).GetMethod("op_Inequality"))
+                );
+                c.GotoPrev(MoveType.Before, x => x.MatchLdloc(13));
+
+                c.MoveAfterLabels();
+                c.Emit(OpCodes.Ldarg, 0);
+                c.EmitDelegate<Func<bool, Player, bool>>((bool isNotGourmand, Player self) =>
+                {
+                    return isNotGourmand && self.SlugCatClass != MoreSlugcats.MoreSlugcatsEnums.SlugcatStatsName.Spear;
+                });
+                // UnityEngine.Debug.Log(il);
+            }
+            catch (Exception e) { UnityEngine.Debug.Log(e); }
         }
     }
 }
