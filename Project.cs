@@ -64,16 +64,17 @@ namespace Ambulant
         {
             try
             {
-                ILCursor c = new ILCursor(il);
                 // thank you so much jacob_v_thaumiel and alphappy on discord you are so awesome
+                ILCursor c = new ILCursor(il);
+                // find the place before it's checking the x/y velocity
                 c.GotoNext(
                     MoveType.After,
                     x => x.MatchLdlocs(13),
                     x => x.MatchLdfld(typeof(Vector2).GetField(nameof(Vector2.x))),
                     x => x.MatchLdcR4(0.0f)
                 );
-                c.GotoPrev(MoveType.Before, x => x.MatchLdloc(13));
-
+                c.GotoPrev(MoveType.Before, x => x.MatchLdlocs(13));
+                // start adding stuff, like the delegate to detect if the player has reduced tech
                 c.MoveAfterLabels();
                 c.EmitDelegate<Func<Player, bool>>((Player self) =>
                 {
@@ -83,8 +84,17 @@ namespace Ambulant
                     }
                     return returner;
                 });
-                c.Emit(OpCodes.LdcR4, 0.0f);
-                c.Emit(OpCodes.Beq, "IL_1F88");
+                // but wait, we gotta find where we want to send the code off to if the player has reduced tech
+                ILCursor c2 = new ILCursor(il);
+                c2.GotoNext(
+                    MoveType.After,
+                    x => x.MatchStlfd(typeof(int32).GetField(nameof(int32))),
+                    x => x.MatchBr(out _),
+                    x => x.MatchLdlocs(9),
+                );
+                c2.GotoPrev(MoveType.Before, x => x.MatchLdlocs(9));
+                // okay now we can finish by directing to where we send the code off to if player has reduced tech
+                c.Emit(OpCodes.Brfalse, c2.Next);
                 // UnityEngine.Debug.Log(il);
             }
             catch (Exception e) { UnityEngine.Debug.Log(e); }
