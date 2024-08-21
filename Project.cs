@@ -70,16 +70,19 @@ namespace Ambulant
                     MoveType.After,
                     x => x.MatchLdlocs(13),
                     x => x.MatchLdfld(typeof(Vector2).GetField(nameof(Vector2.x))),
-                    x => x.MatchLdcR4(0.0f),
-                    x => x.MatchCallOrCallvirt(typeof(ExtEnum<SlugcatStats.Name>).GetMethod("op_Inequality"))
+                    x => x.MatchLdcR4(0.0f)
                 );
                 c.GotoPrev(MoveType.Before, x => x.MatchLdloc(13));
 
                 c.MoveAfterLabels();
                 c.Emit(OpCodes.Ldarg, 0);
-                c.EmitDelegate<Func<bool, Player, bool>>((bool isNotGourmand, Player self) =>
+                c.EmitDelegate<Func<Player, bool>>((Player self) =>
                 {
-                    return isNotGourmand && self.SlugCatClass != MoreSlugcats.MoreSlugcatsEnums.SlugcatStatsName.Spear;
+                    var returner = false;
+                    if (ReducedTech.TryGet(self, out var reducedTeche)) {
+                        returner = reducedTeche;
+                    }
+                    return returner;
                 });
                 // UnityEngine.Debug.Log(il);
             }
