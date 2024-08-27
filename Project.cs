@@ -27,7 +27,8 @@ namespace Ambulant
             //On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 
             On.Player.CanBeSwallowed += canSwallowThis;
-            IL.Player.UpdateBodyMode += playerUpdateBody;
+            On.Player.Update += stopRollingLmao;
+            //IL.Player.UpdateBodyMode += playerUpdateBody;
             Logger.LogDebug("Ambulant's Plugin successfully loaded!");
         }
 
@@ -37,6 +38,31 @@ namespace Ambulant
             //{
             //    Hooks.RemoveHooks();
             //};
+        }
+
+        private bool stopRollingLmao(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            var isTrue2 = false;
+            if (ReducedTech.TryGet(self, out var reducetech))
+            {
+                if (reducetech == true)
+                {
+                    isTrue2 = true;
+                }
+            }
+            if (isTrue2)
+            {
+                self.slideCounter = 0;
+                if (self.animation == Player.AnimationIndex.Roll)
+                {
+                    self.rollDirection = 0;
+                    self.room.PlaySound(SoundID.Slugcat_Roll_Finish, base.mainBodyChunk.pos, 1f, 1f);
+                    self.animation = Player.AnimationIndex.None;
+                    self.standing = (self.input[0].y > -1);
+                }
+            }
+            orig(self, eu);
+
         }
 
         private bool canSwallowThis(On.Player.orig_CanBeSwallowed orig, Player self, PhysicalObject testObj)
