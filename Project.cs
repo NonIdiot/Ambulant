@@ -60,7 +60,6 @@ namespace Ambulant
             orig(self, eu);
         }
 
-
         private bool canSwallowThis(On.Player.orig_CanBeSwallowed orig, Player self, PhysicalObject testObj)
         {
             var isTrue = false;
