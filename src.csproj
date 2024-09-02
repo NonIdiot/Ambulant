@@ -12,8 +12,8 @@
     <ProjectGuid>{E0A48B0C-3A17-4672-BADD-373B0A628D8B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>src</RootNamespace>
-    <AssemblyName>src</AssemblyName>
+    <RootNamespace>Ambulant</RootNamespace>
+    <AssemblyName>Ambulant</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
