@@ -1,0 +1,13 @@
+sm9b
+amber_gm1
+
+Instead of listening to the hefty slugcat's incessant blabber, you begin to tune him out while looking off into the distance.
+"You can't just enter a colony just because you want a mate. See, even if we're the same species, we can't trust outsiders-"
+Suddenly, you see a different slugcat in the distance, carrying what looks to be a box of supplies and trinkets.
+
+Stare off somewhere else.
+amber_stare_1a.txt
+Stare closely at them.
+amber_stare_1b.txt
+Follow them.
+amber_2.txt

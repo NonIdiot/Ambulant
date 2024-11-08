@@ -40,7 +40,7 @@ namespace Ambulant
             //};
         }
 
-        private bool stopRollingLmao(On.Player.orig_UpdateAnimation orig, Player self, bool eu)
+        private bool stopRollingLmao(On.Player.orig_MovementUpdate orig, Player self, bool eu)
         {
             var isTrue2 = false;
             if (ReducedTech.TryGet(self, out var reducetech))
@@ -52,6 +52,8 @@ namespace Ambulant
             }
             if (isTrue2)
             {
+                self.rollDirection = 0;
+                self.rollcounter = 0;
                 self.slideCounter = 0;
                 self.initSlideCounter = 0;
                 self.stopRollingCounter = 0;

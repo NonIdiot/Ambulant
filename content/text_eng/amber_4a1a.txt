@@ -1,0 +1,11 @@
+ambereyebrow_anim_0.5
+amber_temp
+
+The orange slugcat pauses for a second, then stares off into the distance for a bit,
+and then it almost seems as though a lightbulb flashes over their head.
+"Oh- m... oh- wait- OHHHHHHH...", he says. "I see what you're getting at now."
+He then flashes you 'the look'. However, before you can reciprocate, you hear a
+set of footsteps behind you, As you turn around, you see the hefty slugcat storming towards you.
+
+Nervously back up.
+amber_isntpissed_gourmispissed_1.txt

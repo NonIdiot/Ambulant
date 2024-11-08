@@ -1,0 +1,13 @@
+sm1
+amber_temp
+
+Amber says, "I mean, like I said, you seemed like a pretty cool fella, and,
+uh... I like your vibes," as he blushes a bit.
+"well then, where we gonna shelter if we cant go to ur place?" you say back.
+"I mean, I haven't been kicked out of the colony in a while, but I know JUST the place.
+Here, follow me."
+"wait- i got a question for u first"
+"Alright, shoot."
+
+"what karma are u at"
+amber_isntpissed_gourmispissed_4.txt

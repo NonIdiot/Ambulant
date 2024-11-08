@@ -1,0 +1,14 @@
+amber_sm4
+amber_temp
+
+The orange slugcat sort of jumps a bit, clearly at least a bit startled from your sudden
+appearance behind them. They turn around, now face-to-face with you.
+"...uh, good, I guess? Um- who are you again?"
+They tilt their head sideways, seemingly out of confusion.
+
+"ur future mate hehe~"
+amber_4a1.txt
+"well, I'm just passing through here on my way to the colony"
+amber_fuckingkillsyou_1.txt
+"oh, just ur regular ol' slugcat :3"
+amber_4b1.txt

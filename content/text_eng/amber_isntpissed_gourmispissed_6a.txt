@@ -1,0 +1,17 @@
+sm9b
+amber_temp
+
+"um... e... not," you say, struggling to come up with anything else.
+"Oh, Enot? That's a unique one. Never heard a name like that before. Does it stand for something?" Amber says, seeming curious.
+"nah, my parents were uhh... just, really stupid," you respond.
+"Yeah, I feel ya. Some slugcats just aren't really great parents. Heck, I heard about one slugcat
+whose parents dropped him off a cliff while trying to escape the rain," Amber says, in an attempt
+to relate to your (entirely made up) parental issues.
+"Hey, speaking of, the rain's coming pretty soon. Which way do you wanna go here?
+I know of a nearby shelter, and either one of these paths lead to it," Amber says,
+pointing towards two pipes on the other side of the room.
+
+"how about we go left?"
+amber_dragalongtoleft.txt
+"how about we go ri-"
+amber_dragalongfromright.txt

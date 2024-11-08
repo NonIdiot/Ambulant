@@ -1,0 +1,9 @@
+amber_sm1
+amber_gm2
+
+The hefty slugcat looks at you with a very annoyed expression.
+"Look, point is, I can't trust you. Even though I understand your desires, I still can't allow you in."
+You look back to where the orange slugcat was, but they're gone now. You retort back with, "well i dont care lol".
+
+Maneuver your way past.
+west_6endc.txt

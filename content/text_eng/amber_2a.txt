@@ -1,0 +1,11 @@
+amber_sm2
+amber_temp
+
+Upon closer inspection, you see that this orange slugcat has some blob-like dark spots on the
+top and bottom of their tail. They also seem to be carrying the box as though it were lightweight,
+despite it being filled with things like spears and Squidcada corpses. Perhaps they are good at
+climbing poles. Regardless, you also see that their ears are partially missing. Whether they are
+folded inward or partially cut is impossible to tell from behind.
+
+"hey there bb, how u doin"
+amber_3.txt

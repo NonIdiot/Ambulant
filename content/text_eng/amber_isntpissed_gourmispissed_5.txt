@@ -1,0 +1,9 @@
+ambereyebrow_anim_0.3
+amber_temp
+
+"Anyways, ready to head off to that place I was talkin' about?", he says.
+"yep, lets go," you say back to him.
+He then grabs your hand and drags you along.
+
+"woah, where we goin, Amber?~"
+amber_isntpissed_gourmispissed_6.txt

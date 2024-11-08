@@ -1,0 +1,10 @@
+ambereyebrow_001
+amber_temp
+
+"so you seem like you don't have a mate yet, huh? how about we go change that?" you say to him.
+His flusteredness is now double of what it was before.
+However, just as you are about to continue flirting, you hear a set of footsteps that
+could only come from a particularly rotund yet pissed-off slugcat.
+
+Turn around.
+amber_isntpissed_gourmispissed_1.txt

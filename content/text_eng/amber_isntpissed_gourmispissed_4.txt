@@ -1,0 +1,7 @@
+ambereyebrow_anim_0.3
+amber_amhowmany
+
+Amber gives you a goofy grin, and holds up two fingers.
+
+"..."
+amber_isntpissed_gourmispissed_5.txt

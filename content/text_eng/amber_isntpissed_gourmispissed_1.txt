@@ -1,0 +1,12 @@
+amber_sm1
+amber_temp
+
+"I thought we were having an actual conversation, but NO, you had to walk away randomly,
+didn't you?" says the hefty slugcat, with a piercing glare.
+"well, um, I-" you stammer out.
+"You just can't seem to listen to me, can you? Unless it benefits you-"
+"Hey, wait," says the orange slugcat. "They seemed like they were being a nice person to me."
+"Amber, this isn't really something that involves you," says the hefty slugcat.
+
+Continue to sit there and listen to their argument.
+amber_isntpissed_gourmispissed_2.txt

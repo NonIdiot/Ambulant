@@ -1,0 +1,10 @@
+sm1
+amber_temp
+
+While the hefty slugcat rambles on about whatever nonsense, you sneak off, luckily without being seen yet.
+You approach the orange slugcat, who still has no idea that you're there.
+
+Observe further.
+amber_2a.txt
+"hey there bb, how u doin"
+amber_3.txt

@@ -1,0 +1,13 @@
+sm8
+amber_temp
+
+Amber's expression suddenly changes to a much more surprised and worried expression.
+"Wait, what?" he responds, in a much more deep and serious tone than before.
+"yeah im hungry as FUCK dude", you respond
+"Do you at least have any food stored up from last cycle?"
+"nah, im on empty rn"
+"...and you're telling me this as the shelter's closing?"
+You begin to hear the mechanical whirrs of the shelter doors closing.
+
+Gawk at the doors as they begin to close.
+amber_intheshelter_3.txt

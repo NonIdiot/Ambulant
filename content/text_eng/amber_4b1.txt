@@ -1,0 +1,14 @@
+amber_sm5
+amber_temp
+
+The orange slugcat seems less confused and more conversational now.
+"Um, alright. Well, I haven't really introduced myself yet. My official title is The Ambulant,
+but everyone just calls me Amber."
+"thats a sexy name," you flirt back.
+"Oh, umm... thanks," Amber says.
+He begins to look flustered and now has a blush across his face.
+
+Rub up against him
+amber_4b2.txt
+Slap him in the face and say "GOTTEM LMAO"
+amber_betrayal.txt

@@ -1,0 +1,14 @@
+sm1
+amber_temp
+
+"I know they didn't do the right thing with you back there, but I kinda like them," Amber says.
+"...is there any way I can convince you out of this?"
+"No, not really."
+"Well, you do you, but know you can't bring them into the colony under any circumstances."
+The hefty slugcat picks up the box that Amber was holding.
+"And you owe me one for making ME carry this all the way back to my place, understood?"
+"Yup, got it, boss," Amber says back, rolling his eyes.
+The hefty slugcat then grumbles something under his breath to himself, and promptly walks off.
+
+"oh wait ur not following them?"
+amber_isntpissed_gourmispissed_3.txt

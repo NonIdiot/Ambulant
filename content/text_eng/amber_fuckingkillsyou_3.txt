@@ -1,0 +1,11 @@
+sm5
+amber_temp
+
+The orange slugcat drops his box, scattering its contents on the floor. He then throws a flurry of
+spears at you, one after another. You manage to dodge only about 2, but get hit by the rest.
+You perish on the spot after the fifth spear goes right through your chest.
+
+RESTART
+start.txt
+
+FADE

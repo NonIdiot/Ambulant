@@ -1,0 +1,12 @@
+sm9c
+amber_temp
+
+Before you can finish, Amber cuts you off, saying, "Wait- never mind, I just remembered
+the right path's pretty dangerous. You know, leeches, centipedes, the whole deal.
+Anyways, let's head left!"
+Begrudgingly, you head with Amber through the left pipe. After a bit more nice scenery and an odd
+lack of hostile creatures, you finally make it to a clearing, of which has an entrance to a shelter.
+"Alright, let's head in!" Amber says, seeming quite excited to be with you.
+
+Enter the shelter.
+amber_intheshelter_1.txt

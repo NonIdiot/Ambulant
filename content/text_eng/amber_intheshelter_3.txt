@@ -1,0 +1,9 @@
+sm5
+amber_temp
+
+The doors close around you and Amber, just as you realize your fatal mistake.
+
+RESTART
+start.txt
+
+FADE

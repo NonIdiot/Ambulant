@@ -1,0 +1,14 @@
+sm9b
+amber_temp
+
+"...wait, how? Does anyone call you by anything, like, The Charmer or something?" Amber says,
+now giving you the same head-tiltedly confused look as before.
+"nah, im just too awesome to have a name," you say back.
+"Well... alrighty then. Anyways, the rain's coming pretty soon. Which way do you wanna go here?
+I know of a nearby shelter, and either way leads to it," Amber says, pointing towards
+two pipes on the other side of the room.
+
+"how about we go left?"
+amber_dragalongtoleft.txt
+"how about we go ri-"
+amber_dragalongfromright.txt

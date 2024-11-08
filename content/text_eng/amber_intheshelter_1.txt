@@ -1,0 +1,12 @@
+amber_sm6
+amber_temp
+
+As you enter, you see a very well-decorated Ancient Shelter, filled with hanging lanterns,
+graffiti on the wall, and even a cozy-looking section of the floor, seemingly made from
+soft and squishy materials. It's, in fact, probably the coziest shelter you've found.
+You and him sit on the softer section of the floor together, staring into each other's eyes.
+Could this be your long-awaited mate? Could Amber be the one?
+Just as you ponder this, your stomach begins to rumble.
+
+Say "man, i havent eaten ANYTHING today" to Amber.
+amber_intheshelter_2.txt

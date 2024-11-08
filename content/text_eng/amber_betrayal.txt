@@ -1,0 +1,10 @@
+amber_smtroll
+amber_temp
+
+The orange slugcat just stands there, dazed. A few seconds later, he says,
+"WHAT WAS THAT FOR???"
+He rubs his face angrily. However, on top of this, you hear the footsteps of a
+particularly pissed off slugcat coming at you from behind.
+
+Suddenly realize your mistakes.
+amber_ispissed_gourmispissed_1.txt

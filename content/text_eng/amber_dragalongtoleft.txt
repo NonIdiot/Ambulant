@@ -1,0 +1,9 @@
+sm10
+amber_temp
+
+Amber says, "Okay, let's go. The other one's pretty dangerous, so may as well go this way anyways."
+You and him enter the left pipe, and after a bit more of some nice scenery and peaceful sprint-walking, the two of you manage to make it to a clearing, of which the entrance to the long-awaited shelter is.
+"Alright, let's head in!" Amber says, seeming quite excited to be with you.
+
+Enter the shelter.
+amber_intheshelter_1.txt

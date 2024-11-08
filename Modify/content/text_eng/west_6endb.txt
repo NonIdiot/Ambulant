@@ -1,0 +1,6 @@
+[FIND]gm7
+[REPLACE]amber_gm1
+[FIND]Maneuver your way past.
+[ADDBEFORE]\n
+[FIND]west_6endc.txt
+[ADDAFTER]\nStare into the distance.\namber_1.txt
