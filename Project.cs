@@ -28,6 +28,9 @@ namespace Ambulant
 
             On.Player.CanBeSwallowed += canSwallowThis;
             On.Player.UpdateAnimation += stopRollingLmao;
+
+            //On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.HasUniqueSprite += Ambulant_Jolly_Sprite;
+            On.JollyCoop.JollyMenu.JollyPlayerSelector.GetPupButtonOffName += Ambulant_Jolly_Name;
             //IL.Player.UpdateBodyMode += playerUpdateBody;
             Logger.LogDebug("Ambulant's Plugin successfully loaded!");
         }
@@ -121,6 +124,26 @@ namespace Ambulant
                 // UnityEngine.Debug.Log(il);
             }
             catch (Exception e) { UnityEngine.Debug.Log(e); }
+        }
+
+        // thank u olaycolay for this code i would've never figured it out without it
+        private static bool Ambulant_Jolly_Sprite(On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.orig_HasUniqueSprite orig, SymbolButtonTogglePupButton self)
+        {
+            // TODO: Make pup sprite
+            if (self.symbolNameOff.Contains("ambulant") && !self.isToggled) return true;
+            return orig(self);
+        }
+        private static string Ambulant_Jolly_Name(On.JollyCoop.JollyMenu.JollyPlayerSelector.orig_GetPupButtonOffName orig, JollyPlayerSelector self)
+        {
+            SlugcatStats.Name playerClass = self.JollyOptions(self.index).playerClass;
+            if (playerClass != null && playerClass.value == "Ambulant"
+            {
+                return "ambulant_pup_off";
+            } else
+            {
+                Logger.LogDebug("ambulant says: _"+playerClass.value+"_");
+            }
+            return orig(self);
         }
     }
 }
