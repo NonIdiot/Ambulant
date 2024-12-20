@@ -31,8 +31,6 @@
 		"food_max": 10,
 		"expedition_enabled": true,
 		"expedition_description": "With the power of hypermobility and sheer determination,<LINE>The Ambulant sets out in a test of resilience.",
-		"world_state": "Red",
-    	"ambulant/swallow_only_pearls": true,
-    	"ambulant/reduced_tech": true
+		"world_state": "Red"
 	}
 }
