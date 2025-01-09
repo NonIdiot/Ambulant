@@ -9,6 +9,7 @@ using BepInEx.Logging;
 using SlugBase.SaveData;
 using SlugBase.Features;
 using static SlugBase.Features.FeatureTypes;
+using JollyCoop.JollyMenu;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
@@ -29,10 +30,10 @@ namespace Ambulant
                 //On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 
                 //On.Player.CanBeSwallowed += canSwallowThis;
-                //On.Player.UpdateAnimation += stopRollingLmao;
+                On.Player.MovementUpdate += StopRollingLmao;
 
                 //On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.HasUniqueSprite += Ambulant_Jolly_Sprite;
-                On.JollyCoop.JollyMenu.JollyPlayerSelector.GetPupButtonOffName += Ambulant_Jolly_Name;
+            //    On.JollyCoop.JollyMenu.JollyPlayerSelector.GetPupButtonOffName += Ambulant_Jolly_Name;
                 //IL.Player.UpdateBodyMode += playerUpdateBody;
                 Logger.LogDebug("Ambulant's Plugin successfully loaded!");
             }
@@ -44,12 +45,32 @@ namespace Ambulant
 
         private void OnDisable()
         {
-            if (restartMode)
-            {
-                Hooks.RemoveHooks();
-            };
+            //if (restartMode)
+            //{
+            //    Hooks.RemoveHooks();
+            //};
         }
 
+        private void StopRollingLmao(On.Player.orig_MovementUpdate orig, Player self, bool eu)
+        {
+            var isTrue2 = false;
+            if (ReducedTech.TryGet(self, out var reducetech))
+            {
+                if (reducetech == true)
+                {
+                    isTrue2 = true;
+                }
+            }
+            if (isTrue2)
+            {
+                self.rollDirection = 0;
+                self.rollCounter = 20;
+                self.slideCounter = 0;
+                self.initSlideCounter = 0;
+                self.stopRollingCounter = 20;
+                self.longBellySlide = false;
+            }
+        }
         
         private static string Ambulant_Jolly_Name(On.JollyCoop.JollyMenu.JollyPlayerSelector.orig_GetPupButtonOffName orig, JollyPlayerSelector self)
         {
@@ -59,7 +80,7 @@ namespace Ambulant
                 return "ambulant_pup_off";
             } else
             {
-                Logger.LogDebug("ambulant says: _"+playerClass.value+"_");
+                //Logger.LogDebug("ambulant says: _"+playerClass.value+"_");
             }
             return orig(self);
         }
