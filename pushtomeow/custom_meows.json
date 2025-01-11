@@ -1,0 +1,10 @@
+{
+	"custom_meows": [
+		{
+			"slugcat_id": "ambulant",
+			"short_meow_soundid": "AmberMeowShort",
+			"long_meow_soundid": "AmberMeow",
+			"volume_multiplier": 0.7
+		}
+	]
+}

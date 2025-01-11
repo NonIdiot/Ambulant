@@ -1,5 +1,5 @@
 sm5
-amber_temp
+amber_am12
 
 The doors close around you and Amber, just as you realize your fatal mistake.
 

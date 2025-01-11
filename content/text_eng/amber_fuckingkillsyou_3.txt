@@ -1,5 +1,5 @@
 sm5
-amber_temp
+amber_am11
 
 The orange slugcat drops his box, scattering its contents on the floor. He then throws a flurry of
 spears at you, one after another. You manage to dodge only about 2, but get hit by the rest.

@@ -1,9 +1,10 @@
-sm_10
-amber_temp
+sm10
+amber_am1
 
 "You'll see." Amber replies.
 You and Amber travel across many beautiful landscapes, with flowers, trees, worm grass, yeeks,
-and all sorts of foliage and wildlife. It's beautiful to say the least, and you're surprised that you didn't take this path on the way to where you met Amber and the other slugcat.
+and all sorts of foliage and wildlife. It's beautiful to say the least, and you're surprised that 
+you didn't take this path on the way to where you met Amber and the other slugcat.
 After some time, Amber looks at you, and says, "Hey, by the way, I never got your name. What was it again?"
 
 Make one up on the spot.

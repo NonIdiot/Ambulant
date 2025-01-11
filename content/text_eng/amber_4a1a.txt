@@ -1,5 +1,5 @@
 ambereyebrow_anim_0.5
-amber_temp
+amber_am3
 
 The orange slugcat pauses for a second, then stares off into the distance for a bit,
 and then it almost seems as though a lightbulb flashes over their head.

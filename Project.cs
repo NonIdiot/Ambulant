@@ -29,7 +29,7 @@ namespace Ambulant
                 Logger.LogDebug("Ambulant's Plugin loading...");
                 //On.RainWorld.OnModsInit += Extras.WrapInit(LoadResources);
 
-                //On.Player.CanBeSwallowed += canSwallowThis;
+                On.Player.CanBeSwallowed += canSwallowThis;
                 On.Player.MovementUpdate += StopRollingLmao;
 
                 //On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.HasUniqueSprite += Ambulant_Jolly_Sprite;
@@ -70,18 +70,45 @@ namespace Ambulant
                 self.stopRollingCounter = 20;
                 self.longBellySlide = false;
             }
+            orig(self, eu);
         }
         
         private static string Ambulant_Jolly_Name(On.JollyCoop.JollyMenu.JollyPlayerSelector.orig_GetPupButtonOffName orig, JollyPlayerSelector self)
         {
             SlugcatStats.Name playerClass = self.JollyOptions(self.index).playerClass;
-            if (playerClass != null && playerClass.value == "Ambulant")
+            if (playerClass != null && playerClass.value == "Ambulant" && !self.JollyOptions(self.index).isPup)
             {
                 return "ambulant_pup_off";
             } else
             {
                 //Logger.LogDebug("ambulant says: _"+playerClass.value+"_");
             }
+            return orig(self);
+        }
+
+        private bool canSwallowThis(On.Player.orig_CanBeSwallowed orig, Player self, PhysicalObject testObj)
+        {
+            var isTrue = false;
+            if (orig(self, testObj))
+            {
+                isTrue = true;
+            }
+
+            if (SwallowOnlyPearls.TryGet(self, out bool swallowporl) && swallowporl == true)
+            {
+                if (!(testObj is DataPearl))
+                {
+                    isTrue = false;
+                }
+            }
+            return isTrue;
+        }
+
+        // thank u olaycolay for this code i would've never figured it out without it
+        private static bool Ambulant_Jolly_Sprite(On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.orig_HasUniqueSprite orig, SymbolButtonTogglePupButton self)
+        {
+            // TODO: Make pup sprite
+            if (self.symbolNameOff.Contains("ambulant") && !self.isToggled) return true;
             return orig(self);
         }
     }

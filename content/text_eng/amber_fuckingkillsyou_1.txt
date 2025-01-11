@@ -1,5 +1,5 @@
 amber_sm3
-amber_temp
+amber_am1
 
 The orange slugcat seems less confused and more conversational now.
 "Oh. I see. I've never seen you around here before, though. Did my boss give you permission to enter?"

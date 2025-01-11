@@ -1,5 +1,5 @@
 sm9c
-amber_temp
+amber_am10
 
 Before you can finish, Amber cuts you off, saying, "Wait- never mind, I just remembered
 the right path's pretty dangerous. You know, leeches, centipedes, the whole deal.

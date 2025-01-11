@@ -1,5 +1,5 @@
 amber_sm4
-amber_temp
+amber_am4
 
 The orange slugcat sort of jumps a bit, clearly at least a bit startled from your sudden
 appearance behind them. They turn around, now face-to-face with you.

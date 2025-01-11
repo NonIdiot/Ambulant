@@ -1,5 +1,5 @@
 amber_smtroll
-amber_temp
+amber_am9
 
 The orange slugcat just stands there, dazed. A few seconds later, he says,
 "WHAT WAS THAT FOR???"

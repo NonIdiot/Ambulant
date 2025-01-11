@@ -1,5 +1,5 @@
 amber_sm2
-amber_temp
+amber_am2
 
 Upon closer inspection, you see that this orange slugcat has some blob-like dark spots on the
 top and bottom of their tail. They also seem to be carrying the box as though it were lightweight,

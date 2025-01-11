@@ -1,5 +1,5 @@
 amber_sm5
-amber_temp
+amber_am7
 
 The orange slugcat seems less confused and more conversational now.
 "Um, alright. Well, I haven't really introduced myself yet. My official title is The Ambulant,

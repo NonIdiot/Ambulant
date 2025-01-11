@@ -1,5 +1,5 @@
 amber_sm6
-amber_temp
+amber_am8
 
 As you enter, you see a very well-decorated Ancient Shelter, filled with hanging lanterns,
 graffiti on the wall, and even a cozy-looking section of the floor, seemingly made from
