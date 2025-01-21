@@ -37,6 +37,7 @@ namespace Ambulant
                 On.Player.MovementUpdate += StopRollingLmao;
                 On.Player.DeathByBiteMultiplier += deathByBite;
                 On.Player.Update += StopRollingLmao2;
+                On.Player.UpdateAnimation += StopRollingLmao3;
 
                 //On.JollyCoop.JollyMenu.SymbolButtonTogglePupButton.HasUniqueSprite += Ambulant_Jolly_Sprite;
                 //    On.JollyCoop.JollyMenu.JollyPlayerSelector.GetPupButtonOffName += Ambulant_Jolly_Name;
@@ -99,6 +100,20 @@ namespace Ambulant
                 {
                     self.rollCounter = 11;
                 }
+                if (self.input[0].y>0 && (self.bodyChunks[0].vel[0]==0 || self.animation == Player.AnimationIndex.StandUp) && self.input[1].jmp)
+                {
+                    int myDir = ((self.input[0].x == 0) ? 0 : ((self.input[0].x > 0) ? 1 : -1));
+                    self.animation = Player.AnimationIndex.Flip;
+                    self.room.PlaySound(SoundID.Slugcat_Flip_Jump, self.mainBodyChunk, false, 1f, 1f);
+                    self.rollDirection = myDir;
+                    self.slideDirection = self.rollDirection;
+                    self.rollCounter = 11;
+                    self.bodyChunks[0].vel.y = 15f;
+                    self.bodyChunks[1].vel.y = 7f;
+                    self.bodyChunks[0].vel.x = self.bodyChunks[0].vel.x * 0.5f + 10f * (float)myDir;
+                    self.bodyChunks[1].vel.x *= 0.5f;
+                    self.standing = false;
+                }
             }
             if (isTrue4 && self.mushroomCounter > 40)
             {
@@ -107,6 +122,54 @@ namespace Ambulant
             orig(self, eu);
         }
 
+        private void StopRollingLmao2(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            var isTrue5 = false;
+            if (Escapist.TryGet(self, out var escape))
+            {
+                if (escape == true)
+                {
+                    isTrue5 = true;
+                }
+            }
+            if (isTrue5 && !self.dead && self.dangerGrasp != null && self.dangerGrasp.grabber != null)
+            {
+                //if ((self.dangerGraspTime == 10 && UnityEngine.Random.value < 0.2)||(self.dangerGraspTime == 29 && UnityEngine.Random.value < 0.375))
+                // haha 1-((1-x)(1-y))=z go brr where x is the first random value y is the second random value and z is the desired chance
+                //{
+                self.dangerGrasp.grabber.LoseAllGrasps();
+                var room = self.room;
+                var pos = self.mainBodyChunk.pos;
+                var color = self.ShortCutColor();
+                room.AddObject(new ExplosionSpikes(room, pos, 8, 29f, 7f, 7f, 170f, color));
+                room.AddObject(new ShockWave(pos, 229f, 0.029f, 7, false));
+
+                room.PlaySound(SoundID.Slugcat_Vertical_Chute_Jump_Success, pos);
+                room.InGameNoise(new Noise.InGameNoise(pos, 9000f, self, 1f));
+                //}
+            }
+            orig(self, eu);
+        }
+
+        private void StopRollingLmao3(On.Player.orig_UpdateAnimation orig, Player self)
+        {
+            var isTrue3 = false;
+            if (AdditionalTech.TryGet(self, out var additiontech))
+            {
+                if (additiontech == true)
+                {
+                    isTrue3 = true;
+                }
+            }
+            if (isTrue3)
+            {
+                if (self.bodyMode != null && self.animation != null && self.bodyMode == Player.BodyModeIndex.CorridorClimb && self.animation == Player.AnimationIndex.CorridorTurn && self.corridorTurnCounter < 30)
+                {
+                    self.corridorTurnCounter = 30;
+                }
+            }
+            orig(self);
+        }
         private static string Ambulant_Jolly_Name(On.JollyCoop.JollyMenu.JollyPlayerSelector.orig_GetPupButtonOffName orig, JollyPlayerSelector self)
         {
             SlugcatStats.Name playerClass = self.JollyOptions(self.index).playerClass;
@@ -156,35 +219,6 @@ namespace Ambulant
             }
             //Logger.LogWarning("aw dangit");
             return orig(self);
-        }
-
-        private void StopRollingLmao2(On.Player.orig_Update orig, Player self, bool eu)
-        {
-            var isTrue5 = false;
-            if (Escapist.TryGet(self, out var escape))
-            {
-                if (escape == true)
-                {
-                    isTrue5 = true;
-                }
-            }
-            if (isTrue5 && !self.dead && self.dangerGrasp != null && self.dangerGrasp.grabber != null)
-            {
-                //if ((self.dangerGraspTime == 10 && UnityEngine.Random.value < 0.2)||(self.dangerGraspTime == 29 && UnityEngine.Random.value < 0.375))
-                // haha 1-((1-x)(1-y))=z go brr where x is the first random value y is the second random value and z is the desired chance
-                //{
-                self.dangerGrasp.grabber.Stun(5);
-                var room = self.room;
-                var pos = self.mainBodyChunk.pos;
-                var color = self.ShortCutColor();
-                room.AddObject(new ExplosionSpikes(room, pos, 14, 30f, 9f, 7f, 170f, color));
-                room.AddObject(new ShockWave(pos, 330f, 0.045f, 5, false));
-
-                room.PlaySound(SoundID.Slugcat_Belly_Slide_Init, pos);
-                room.InGameNoise(new Noise.InGameNoise(pos, 9000f, self, 1f));
-                //}
-            }
-            orig(self, eu);
         }
     }
 }
