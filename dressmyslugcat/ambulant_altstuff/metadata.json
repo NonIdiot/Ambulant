@@ -1,0 +1,13 @@
+{
+  "id": "nassoc.ambulant_alt",
+  "name": "The Ambulant (alt stuff)",
+  "author": "nonAssociatedIdiot",
+  "defaults": {
+    "LEGS": {
+      "Color": "#b03b27"
+    },
+    "HEAD": {
+      "Color": "#b03b27"
+    }
+  }
+}

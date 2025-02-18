@@ -4,7 +4,7 @@
     "spawn": 0,
     "seed": 1,
     "nonaggressive": true,
-    "class": "Ambulant",
+    "class": "ambulant",
     "win": "bring",
     "item": "Spear",
     "win2": "tame"

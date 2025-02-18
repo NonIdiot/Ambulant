@@ -2,7 +2,7 @@
     "name": "Conquerable Foe",
     "arena": "HI_StovePipes",
     "spawn": 0,
-    "class": "Ambulant",
+    "class": "ambulant",
     "win": "kill",
     "kill_creature": "MirosVulture",
     "rain_time": 690

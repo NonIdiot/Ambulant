@@ -3,7 +3,7 @@
     "arena": "waterworks",
     "spawn": 0,
     "seed": 2,
-    "class": "Ambulant",
+    "class": "ambulant",
     "win": "point",
     "points": 7,
     "rain_time": 420

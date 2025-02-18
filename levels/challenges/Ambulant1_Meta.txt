@@ -2,7 +2,7 @@
     "name": "Unconquerable Foe",
     "arena": "HI_StovePipes",
     "spawn": 0,
-    "class": "Ambulant",
+    "class": "ambulant",
     "rain_time": 240,
     "win": "point",
     "points": 10,

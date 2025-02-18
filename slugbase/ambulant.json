@@ -8,7 +8,7 @@
 		"tunnel_speed": 1.6,
 		"climb_speed": 2.0,
 		"walk_speed": 1.2,
-		"throw_skill": 0,
+		"throw_skill": 1,
 		"crouch_stealth": 0.8,
 		"lung_capacity": [0.9,0.5],
 		"loudness": [2,1],
@@ -21,22 +21,26 @@
   			"plants": 1.0,
 			"overrides": {
 				"Scavenger": 0.25,
-				"EliteScavenger": 0.25
+				"EliteScavenger": 0.25,
+				"ScavengerKing": 0.25,
+				"SlugNPC": 0
 			}
 		},
 		"can_maul": true,
-		"maul_blacklist": ["Scavenger","EliteScavenger"],
+		"maul_blacklist": ["Scavenger","EliteScavenger","ScavengerKing","SlugNPC"],
 		"start_room": "HI_B04",
 		"food_min": 6,
 		"food_max": 10,
 		"expedition_enabled": true,
 		"expedition_description": "With the power of hypermobility and sheer determination,<LINE>The Ambulant sets out in a test of resilience.",
 		"world_state": "Red",
-    	"ambulant/swallow_only_pearls": true,
+		"ambulant/swallow_only_pearls": true,
     	"ambulant/reduced_tech": false,
     	"ambulant/additional_tech": true,
 		"ambulant/ineffective_shrooms": true,
 		"ambulant/escapist": true,
+		"ambulant/has_dizzy_mechanic": true,
+		"ambulant/throw_fixed": true,
 		"ambulant/death_by_bite_multiplier": 0.0
 	}
 }
