@@ -119,6 +119,12 @@
     <Reference Include="PUBLIC-Assembly-CSharp">
       <HintPath>..\..\..\..\BepInEx\utils\PUBLIC-Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="PupBase">
+      <HintPath>..\..\..\..\..\..\workshop\content\312520\3280187008\plugins\PupBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PupOnHibernation">
+      <HintPath>..\..\..\..\..\..\workshop\content\312520\3158949334\plugins\PupOnHibernation.dll</HintPath>
+    </Reference>
     <Reference Include="SlugBase">
       <HintPath>..\..\..\..\..\..\..\..\..\Users\charl\Downloads\SlugBase.dll</HintPath>
     </Reference>
@@ -164,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="Ambulant.vstemplate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ambulant.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

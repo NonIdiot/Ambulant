@@ -16,6 +16,8 @@ using DevConsole.Commands;
 using DevConsole;
 using RWCustom;
 using System.Collections.Generic;
+//using PupBase;
+//using PupOnHibernation;
 
 namespace Ambulant
 {
@@ -29,6 +31,9 @@ namespace Ambulant
             // variables
             public int dizziness = 0;
             public int timeUntilUndizzy = 0;
+            public int stopFuckingDying = 0;
+
+            public int throwBoostCool = 0;
         }
     }
 
@@ -46,115 +51,143 @@ namespace Ambulant
         public static readonly PlayerFeature<bool> ThrowFixed = PlayerBool("ambulant/throw_fixed");
         public static readonly PlayerFeature<float> DeathByBiteMultiplier = PlayerFloat("ambulant/death_by_bite_multiplier");
 
-        public static readonly List<bool>[] ScugBalance = { 
+        //public class AmbulantValuesNShit
+        //{
+        //    public static SlugcatStats.Name CombustivePup;
+        
+        //    public static void RegisterValues()
+        //    {
+        //        CombustivePup = new SlugcatStats.Name("Stalkerpup", register: true);
+        //    }
+
+        //    public static void UnregisterValues()
+        //    {
+        //        CombustivePup?.Unregister();
+        //        CombustivePup = null;
+        //    }
+        //}
+
+        // thank you alphappy for logging help too
+        internal static BepInEx.Logging.ManualLogSource logger;
+        internal static void Log(LogLevel loglevel, object msg) => logger.Log(loglevel, msg);
+        public Plugin()
+        {
+            logger = Logger;
+        }
+
+        public static readonly bool[][] ScugBalance = { 
             // crawlflip, beamtipflip, verticalchargepounce, lowermovstun, fastpoleclimb,
             // fastcorridorclimb, funnyflip, escapeliz, escapemiros, fastcorrturn,
             // lessfastcorrturn, leechroll, maggotroll, throwfix, crawlturnroll
 
             // survivor
-            new List<bool> {false,false,false,true,true,
+            new bool[] {false,false,false,true,true,
                             false,false,false,false,false,
                             false,false,false,false,false},
             // monk
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,false,false,false,false,
                             false,true,true,false,false},
             // hunter
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,false,false,false,true,
                             true,false,true,true,false},
             // gourmand
-            new List<bool> {true,false,false,false,false,
+            new bool[] {true,false,false,false,false,
                             false,true,false,false,false,
                             false,true,true,true,true},
             // artificer
-            new List<bool> {true,true,true,true,true,
+            new bool[] {true,true,true,true,true,
                             false,true,false,false,true,
                             true,true,false,false,false},
             // spearmaster
-            new List<bool> {false,false,false,true,true,
+            new bool[] {false,false,false,true,true,
                             true,true,false,false,true,
                             true,false,false,true,false},
             // rivulet
-            new List<bool> {true,true,false,true,true,
+            new bool[] {true,true,false,true,true,
                             false,false,false,false,true,
                             false,false,false,false,false},
             // saint
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,false,false,false,false,
                             false,false,false,false,false},
             // inv
-            new List<bool> {false,false,false,true,true,
+            new bool[] {false,false,false,true,true,
                             false,false,false,false,true,
                             true,true,true,false,true},
             // vinki
-            new List<bool> {true,true,true,true,false,
+            new bool[] {true,true,true,true,false,
                             false,true,false,true,true,
                             true,true,true,false,false},
             // pearlcat
-            new List<bool> {false,true,false,false,false,
+            new bool[] {false,true,false,false,false,
                             false,true,false,true,true,
                             true,false,false,false,false},
             // beecat
-            new List<bool> {false,false,false,true,true,
+            new bool[] {false,false,false,true,true,
                             false,false,false,false,false,
                             false,true,true,false,true},
             // mariner
-            new List<bool> {true,true,false,true,false,
+            new bool[] {true,true,false,true,false,
                             true,false,true,false,true,
                             false,false,true,true,false},
             // nightstriker
-            new List<bool> {false,false,false,true,false,
+            new bool[] {false,false,false,true,false,
                             false,false,false,false,true,
                             true,true,false,true,false},
             // gravel eater
-            new List<bool> {true,false,false,false,false,
+            new bool[] {true,false,false,false,false,
                             false,true,false,true,false,
                             false,true,true,false,true},
-            // forager
-            ScugBalance[3],
+            // forager [copied from gourmand]
+            new bool[] {true,false,false,false,false,
+                            false,true,false,false,false,
+                            false,true,true,true,true},
             // unbound
-            new List<bool> {true,false,true,false,false,
+            new bool[] {true,false,true,false,false,
                             false,false,false,true,true,
                             true,false,true,false,false},
             // entropy (QuesInt)
-            new List<bool> {false,false,false,true,false,
+            new bool[] {false,false,false,true,false,
                             true,true,false,false,false,
                             false,false,false,false,false},
             // marauder (QuesInt)
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,true,false,false,true,
                             true,false,false,true,false},
             // snowflake (WintEnd)
-            new List<bool> {false,true,true,true,false,
+            new bool[] {false,true,true,true,false,
                             true,true,false,false,true,
                             false,false,false,true,false},
             // murderer
-            new List<bool> {true,false,true,true,false,
+            new bool[] {true,false,true,true,false,
                             true,true,false,true,true,
                             false,false,true,false,false},
             // bombadier
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,true,true,false,true,
                             true,false,false,true,false},
             // incandescent (Hailstorm)
-            new List<bool> {false,true,false,false,false,
+            new bool[] {false,true,false,false,false,
                             false,false,true,false,true,
                             true,false,false,false,false},
             // seer
-            new List<bool> {false,false,false,true,false,
+            new bool[] {false,false,false,true,false,
                             false,false,false,false,true,
                             true,true,true,false,false},
             // placeholder
-            new List<bool> {false,false,false,false,false,
+            new bool[] {false,false,false,false,false,
                             false,false,false,false,false,
                             false,false,false,false,false},
             // pouncer
-            new List<bool> {false,true,false,true,true,
+            new bool[] {false,true,false,true,true,
                             false,false,false,false,true,
                             false,true,false,true,false},
-            // barreltail
-            ScugBalance[5]
+            // barreltail [copied from spearmaster]
+            new bool[] {false,false,false,true,true,
+                            true,true,false,false,true,
+                            true,false,false,true,false}
         };
 
         public static readonly string[] ScugBalanceIDs = new string[] {
@@ -165,7 +198,7 @@ namespace Ambulant
             "Murderer", "Bombardier", "Incandescent", "Seer"
         };
 
-        public static bool[] ScugHasAbility(Player self)
+        private static bool[] ScugHasAbility(Player self)
         {
             bool[] fakeBalance = new bool[15];
             bool[] currentBalance = new bool[15];
@@ -174,9 +207,20 @@ namespace Ambulant
                 1, 1, 1, 1, 1,
                 1, 1, 1, 1, 1
             };
-            if (ScugBalanceIDs.Contains(self.SlugCatClass.ToString()))
+            int coolIndex = -1;
+            Plugin.Log(LogLevel.Info, self.SlugCatClass.value);
+            for (var a = 0; a < ScugBalanceIDs.Length; a++)
             {
-                fakeBalance = ScugBalance[ScugBalanceIDs.IndexOf(self.SlugCatClass.ToString())].ToArray();
+                if (ScugBalanceIDs[a] == self.SlugCatClass.value)
+                {
+                    coolIndex = a;
+                    break;
+                }
+            }
+            if (coolIndex != -1)
+            {
+                Plugin.Log(LogLevel.Info, "youre correc");
+                fakeBalance = ScugBalance[coolIndex];
                 for (var a = 0; a < 15; a++)
                 {
                     if (configOptions[a] == 2) // if the given ability is set to ALL
@@ -221,7 +265,9 @@ namespace Ambulant
 
         public static bool[] modsOn = {
             false, // rotund world
-            false // lancer
+            false, // lancer
+            false, // pupbase
+            false // genetic slugpups
         };
 
         public void OnLoad()
@@ -407,7 +453,7 @@ namespace Ambulant
             }).Register();
         }
 
-        public void DodgeEffects(Player self)
+        private void DodgeEffects(Player self)
         {
             var room = self.room;
             var pos = self.mainBodyChunk.pos;
@@ -433,6 +479,11 @@ namespace Ambulant
 
             On.HUD.HUD.InitSinglePlayerHud += HUD_InitSingle;
             On.HUD.HUD.InitMultiplayerHud += HUD_InitMulti;
+            //if (ModManager.ActiveMods.Any(x => x.id == "Antoneeee.PupBase"))
+            //{
+            //    modsOn[2] = true;
+                //PupBaseInit();
+            //}
         }
 
         // the fren :3
@@ -456,6 +507,11 @@ namespace Ambulant
                     modsOn[1] = true;
                 }
 
+                if (ModManager.ActiveMods.Any(x => x.id == "TM.PupOnHibernation"))
+                {
+                    modsOn[3] = true;
+                    //PupBaseInitTwoElectricBoogaloo();
+                }
             }
             catch (Exception e)
             {
@@ -463,9 +519,31 @@ namespace Ambulant
             }
         }
 
+        private static void PupBaseInit()
+        {
+            //_ = PupManager.Register(new PupType(MOD_ID, AmbulantValuesNShit.CombustivePup, spawnWeight: 1) { adultModule = new PupType.AdultModule(new SlugcatStats.Name("SlugpupAdult", register: true), 1) });
+        }
+
+        private static void PupBaseInitTwoElectricBoogaloo()
+        {
+            string[] pupTypes = new string[12];
+            for (var a = 0; a < 4; a++)
+            {
+                pupTypes[0+a] = "Regular";
+                pupTypes[4+a] = "Variant<cC>Hunterpup<cB>";
+                pupTypes[8+a] = "Variant<cC>Rotundpup<cB>";
+            }
+            pupTypes[11] = "Type<cC>Combustivepup<cB>Food<cC>3<cB>";
+            //PupOnHibernationMain.register_many_pups("SlugcatName3", pups);
+        }
+
         private void StopRollingLmao(On.Player.orig_MovementUpdate orig, Player self, bool eu)
         {
             int myDir = ((self.input[0].x == 0) ? 0 : ((self.input[0].x > 0) ? 1 : -1));
+
+            bool[] myAbilities = ScugHasAbility(self);
+            bool fakeIsTrue3 = myAbilities[14] || myAbilities[0] || myAbilities[1] || myAbilities[2]
+            || myAbilities[3] || myAbilities[4] || myAbilities[5] || myAbilities[6];
 
             var isTrue2 = false;
             if (ReducedTech.TryGet(self, out var reducetech))
@@ -508,51 +586,56 @@ namespace Ambulant
                 self.stopRollingCounter = 20;
                 self.longBellySlide = false;
             }
-            if (isTrue3)
+            if (fakeIsTrue3)
             {
                 // MARKER: Crawl Turn Roll
-                self.allowRoll = 15;
-                if (self.slideCounter >= 10)
+                if (myAbilities[14])
                 {
-                    // UNMARKER
+                    self.allowRoll = 15;
+                }
+                if (isTrue3 && self.slideCounter >= 10 && (self.input[0].y > 0 || self.slideCounter == 10))
+                {
+                    // UNUSED MARKER: Dash-turn Stopper
                     self.slideDirection = myDir;
                 }
-                if (self.bodyMode == Player.BodyModeIndex.Crawl && (self.slideCounter == 0 || self.slideCounter >= 10))
+                if (myAbilities[0] && self.bodyMode == Player.BodyModeIndex.Crawl && (self.slideCounter == 0 || self.slideCounter >= 10))
                 {
                     // MARKER: Crawl Flip
                     self.slideCounter = 1;
                 }
-                if (self.input[0].downDiagonal != 0)
+                if (isTrue3 && self.input[0].downDiagonal != 0)
                 {
                     // UNMARKER
                     self.rollCounter = 11;
                 }
-                if (self.animation == Player.AnimationIndex.BeamTip)
+                if (myAbilities[1] && self.animation == Player.AnimationIndex.BeamTip)
                 {
                     // MARKER: Beam Tip Flip
+                    self.slideDirection = -myDir;
                     if (self.input[0].y > 0 && myDir != 0)
                     {
-                        self.slideDirection = -myDir;
                         self.slideCounter = 9;
                     }
                     else
                     {
-                        self.slideDirection = 0;
+                        self.slideCounter = 11;
+                    }
+                }
+                if (isTrue3 && self.bodyMode != Player.BodyModeIndex.Crawl)
+                {
+                    // UNUSED MARKER: Flip Stopper
+                    if (self.input[0].y < 0)
+                    {
                         self.slideCounter = 0;
                     }
                 }
-                if (self.input[0].y < 0 && self.bodyMode != Player.BodyModeIndex.Crawl)
-                {
-                    // UNMARKER
-                    self.slideCounter = 0;
-                }
-                if (self.animation == Player.AnimationIndex.BellySlide && self.consistentDownDiagonal > 20)
+                if (isTrue3 && self.animation == Player.AnimationIndex.BellySlide && self.consistentDownDiagonal > 20)
                 {
                     // UNUSED MARKER: Slide Stopper
                     self.animation = Player.AnimationIndex.None;
                     self.bodyMode = Player.BodyModeIndex.Crawl;
                 }
-                if (self.superLaunchJump == 20 && self.input[0].y > 0)
+                if (myAbilities[2] && self.superLaunchJump == 20 && self.input[0].y > 0)
                 {
                     // MARKER: Vertical Charge-Pounce
                     self.superLaunchJump = 0;
@@ -562,29 +645,44 @@ namespace Ambulant
                     self.bodyChunks[1].vel.y = 6f * mult;
                     self.bodyChunks[1].vel.x = 4f * mult * self.slideDirection;
                 }
-                if (self.slowMovementStun > 10)
+                if (myAbilities[3] && self.slowMovementStun > 10)
                 {
                     // MARKER: Lower Movement Stun
-                    self.slowMovementStun = 10;
+                    if (myAbilities[4] && myAbilities[5])
+                    {
+                        self.slowMovementStun = 10;
+                    }
+                    else if (self.slowMovementStun > 15)
+                    {
+                        self.slowMovementStun = 15;
+                    }
                     if (self.horizontalCorridorSlideCounter < 10 && self.verticalCorridorSlideCounter < 10)
                     {
-                        if (self.bodyMode == Player.BodyModeIndex.ClimbingOnBeam)
+                        if (myAbilities[4] && self.bodyMode == Player.BodyModeIndex.ClimbingOnBeam)
                         {
                             // MARKER: Fast Pole-Climb
                             self.slowMovementStun = 0;
+                            if (self.slideUpPole != 0 && self.slideUpPole < 10)
+                            {
+                                self.slideUpPole = 0;
+                            }
                         }
-                        if (self.bodyMode == Player.BodyModeIndex.CorridorClimb)
+                        if (myAbilities[5] && self.bodyMode == Player.BodyModeIndex.CorridorClimb)
                         {
                             // MARKER: Fast Corridor-Climb
                             self.slowMovementStun = 0;
                         }
                     }
                 }
-                if (self.animation == Player.AnimationIndex.ClimbOnBeam || self.animation == Player.AnimationIndex.HangFromBeam || self.animation == Player.AnimationIndex.StandOnBeam)
+                if (myAbilities[6] && self.animation == Player.AnimationIndex.ClimbOnBeam || self.animation == Player.AnimationIndex.HangFromBeam || self.animation == Player.AnimationIndex.StandOnBeam)
                 {
                     // MARKER: Funny Flip Off Of Horizontal Pole
                     self.slideDirection = myDir;
                     self.initSlideCounter = 29;
+                    if (self.slideCounter == 0 || self.slideCounter > 11)
+                    {
+                        self.slideCounter = 11;
+                    }
                 }
                 /*
                 if (self.input[0].y>0 && (self.bodyChunks[0].vel[0]==0 || self.animation == Player.AnimationIndex.StandUp) && self.input[1].jmp)
@@ -603,6 +701,60 @@ namespace Ambulant
                     //self.bodyChunks[1].vel.x *= 0.5f;
                     self.standing = false;
                 }*/
+                if (isTrue3)
+                {
+                    // UNUSED MARKER: Throwless Boosting
+                    if (self.GetCustomData().throwBoostCool <= 0)
+                    {
+                        if (self.input[0].thrw && self.grasps[0] == null && self.grasps[1] == null && self.bodyMode == Player.BodyModeIndex.Default)
+                        {
+                            if (self.GetCustomData().dizziness > 400)
+                            {
+                                self.Stun(60);
+                                self.GetCustomData().throwBoostCool = 160;
+                            }
+                            else
+                            {
+                                self.GetCustomData().throwBoostCool = 80;
+                            }
+                            self.GetCustomData().dizziness = Math.Min(self.GetCustomData().dizziness + 40, 500);
+                            self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 80);
+                            Vector2 dirr = new Vector2(self.ThrowDirection, 0);
+                            if (self.input[0].y < 0.8)
+                            {
+                                if (self.input[0].y > 0)
+                                {
+                                    dirr.x *= 0.7f;
+                                    dirr.y = 0.25f;
+                                }
+                            }
+                            else
+                            {
+                                dirr = new Vector2(0, 0.5f);
+                            }
+                            self.bodyChunks[0].vel += dirr * 8f;
+                            self.bodyChunks[1].vel -= dirr * 4f;
+                            self.bodyChunks[0].vel.y = (self.bodyChunks[0].vel.y + dirr.y * 8f) / 2;
+                            self.bodyChunks[1].vel.y = (self.bodyChunks[1].vel.y + dirr.y * 8f) / 2;
+                            self.Blink(10);
+                            PlayerGraphics playgraph = (self.graphicsModule as PlayerGraphics);
+                            playgraph.hands[0].vel += dirr * 8f;
+                            playgraph.hands[0].mode = Limb.Mode.Dangle;
+                        }
+                    }
+                    else
+                    {
+                        if (self.bodyMode != Player.BodyModeIndex.Default && self.bodyMode != Player.BodyModeIndex.Swimming && self.stun <= 0)
+                        {
+                            self.GetCustomData().throwBoostCool = Math.Min(20, self.GetCustomData().throwBoostCool);
+                        }
+                        self.GetCustomData().throwBoostCool--;
+                    }
+                }
+                else
+                {
+                    self.GetCustomData().throwBoostCool = 0;
+                }
             }
             if (isTrue4 && self.mushroomCounter > 40)
             {
@@ -618,14 +770,6 @@ namespace Ambulant
 
         private void StopRollingLmao2(On.Player.orig_Update orig, Player self, bool eu)
         {
-            var isTrue5 = false;
-            if (Escapist.TryGet(self, out var escape))
-            {
-                if (escape == true)
-                {
-                    isTrue5 = true;
-                }
-            }
             var isTrue7 = false;
             if (DizzyMechanicActive.TryGet(self, out var getdizzy))
             {
@@ -634,7 +778,7 @@ namespace Ambulant
                     isTrue7 = true;
                 }
             }
-            if (isTrue5 && !self.dead)
+            if (ScugHasAbility(self)[7] && !self.dead)
             {
                 if (self.dangerGrasp != null && self.dangerGrasp.grabber != null)
                 {
@@ -662,7 +806,7 @@ namespace Ambulant
             if (isTrue7)
             {
                 bool woundedOrStarving = self.Wounded || self.Malnourished;
-                if (self.animation == Player.AnimationIndex.Roll || self.animation == Player.AnimationIndex.Flip)
+                if (self.animation == Player.AnimationIndex.Roll || self.animation == Player.AnimationIndex.Flip || self.animation == Player.AnimationIndex.RocketJump)
                 {
                     if (self.GetCustomData().dizziness < 400)
                     {
@@ -675,12 +819,21 @@ namespace Ambulant
                         self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 80);
                         self.animation = Player.AnimationIndex.None;
                         self.stopRollingCounter = 20;
+                        self.Stun(40);
                     }
                 }
-                else if ((self.bodyChunks[1].pos.y - self.bodyChunks[0].pos.y) >= 11 && self.room.gravity != 0 && self.stun == 0 && (self.GetCustomData().dizziness < 500 || self.GetCustomData().timeUntilUndizzy == 0))
+                else if ((self.bodyChunks[1].pos.y - self.bodyChunks[0].pos.y) >= 11 && self.room.gravity != 0 && self.stun == 0 && self.GetCustomData().dizziness < 500 && self.GetCustomData().stopFuckingDying == 0)
                 {
                     self.GetCustomData().dizziness = Math.Min(self.GetCustomData().dizziness + 1, 500);
                     self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 20);
+                }
+                else if (self.GetCustomData().stopFuckingDying > 0)
+                {
+                    if (self.GetCustomData().stopFuckingDying < 50) // if this number was 41, it'd be frame-perfect to escape a softlock when tired/malnourished.
+                    {
+                        self.stun = 0;
+                    }
+                    self.GetCustomData().stopFuckingDying -= 1;
                 }
 
                 if (self.GetCustomData().dizziness >= 500)
@@ -694,6 +847,7 @@ namespace Ambulant
                     self.Stun(120);
                     self.GetCustomData().dizziness -= 1;
                     self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 200);
+                    self.GetCustomData().stopFuckingDying = 170;
                 }
                 else if (self.stun > 0)
                 {
@@ -737,20 +891,19 @@ namespace Ambulant
 
         private void StopRollingLmao3(On.Player.orig_UpdateAnimation orig, Player self)
         {
-            var isTrue3 = false;
-            if (AdditionalTech.TryGet(self, out var additiontech))
-            {
-                if (additiontech == true)
-                {
-                    isTrue3 = true;
-                }
-            }
-            if (isTrue3)
+            if (ScugHasAbility(self)[9])
             {
                 // MARKER: Fast Corridor Turn
-                if (self.bodyMode != null && self.animation != null && self.bodyMode == Player.BodyModeIndex.CorridorClimb && self.animation == Player.AnimationIndex.CorridorTurn && self.corridorTurnCounter < 30)
+                if (self.bodyMode != null && self.animation != null && self.bodyMode == Player.BodyModeIndex.CorridorClimb && self.animation == Player.AnimationIndex.CorridorTurn && !self.Wounded && !self.Malnourished)
                 {
-                    self.corridorTurnCounter = 30;
+                    if (ScugHasAbility(self)[10] && self.corridorTurnCounter < 20)
+                    {
+                        self.corridorTurnCounter = 20;
+                    }
+                    else if (self.corridorTurnCounter < 30 )
+                    {
+                        self.corridorTurnCounter = 30;
+                    }
                 }
             }
             orig(self);
@@ -808,15 +961,7 @@ namespace Ambulant
                 Player player = self.stuckInChunk.owner as Player;
                 if (player != null)
                 {
-                    var isTrue6 = false;
-                    if (Escapist.TryGet(player, out var escape))
-                    {
-                        if (escape == true)
-                        {
-                            isTrue6 = true;
-                        }
-                    }
-                    if (isTrue6 && player.animation == Player.AnimationIndex.Roll)
+                    if (ScugHasAbility(player)[12] && player.animation == Player.AnimationIndex.Roll)
                     {
                         self.stuckInChunk = null;
                         self.mode = DartMaggot.Mode.Free;
@@ -833,15 +978,7 @@ namespace Ambulant
                 Player player = self.grasps[0].grabbed as Player;
                 if (player != null)
                 {
-                    var isTrue6 = false;
-                    if (Escapist.TryGet(player, out var escape))
-                    {
-                        if (escape == true)
-                        {
-                            isTrue6 = true;
-                        }
-                    }
-                    if (isTrue6 && player.animation == Player.AnimationIndex.Roll)
+                    if (ScugHasAbility(player)[11] && player.animation == Player.AnimationIndex.Roll)
                     {
                         self.Stun(40);
                     }
@@ -860,18 +997,6 @@ namespace Ambulant
                 Creature realCreature = self.room.abstractRoom.creatures[num2].realizedCreature;
                 if (realCreature is Player && !realCreature.dead)
                 {
-                    var isTrue5 = false;
-                    if (Escapist.TryGet((Player)realCreature, out var escape))
-                    {
-                        if (escape == true)
-                        {
-                            isTrue5 = true;
-                            if (AmbulantConfig.stupidMirosBirds.Value)
-                            {
-                                runOrig = false;
-                            }
-                        }
-                    }
                     var isTrue7 = false;
                     if (DizzyMechanicActive.TryGet((Player)realCreature, out var getdizzy))
                     {
@@ -880,15 +1005,18 @@ namespace Ambulant
                             isTrue7 = true;
                         }
                     }
-                    if (isTrue5)
+                    if (ScugHasAbility((Player)realCreature)[8])
                     {
+                        if (AmbulantConfig.stupidMirosBirds.Value)
+                        {
+                            runOrig = false;
+                        }
                         int num3 = 0;
                         while (num3 < realCreature.bodyChunks.Length && runOrig)
                         {
                             if (RWCustom.Custom.DistLess(self.Head.pos + a * 30f, realCreature.bodyChunks[num3].pos, 30f + realCreature.bodyChunks[num3].rad))
                             {
-                                // TODO: Make the "(dizziness < 100) ||..." part be "(dizziness < 100 && has dizziness mechanic) ||..."
-                                if (((Player)realCreature).GetCustomData().dizziness < 100 || (((Player)realCreature).GetCustomData().dizziness < 400 && UnityEngine.Random.value < 0.8))
+                                if ((((Player)realCreature).GetCustomData().dizziness < 100 && isTrue7) || (((Player)realCreature).GetCustomData().dizziness < 400 && UnityEngine.Random.value < 0.8))
                                 {
                                     runOrig = false;
                                     self.Stun(20);
@@ -954,18 +1082,6 @@ namespace Ambulant
                 Creature realCreature = self.room.abstractRoom.creatures[num2].realizedCreature;
                 if (realCreature is Player && !realCreature.dead)
                 {
-                    var isTrue5 = false;
-                    if (Escapist.TryGet((Player)realCreature, out var escape))
-                    {
-                        if (escape == true)
-                        {
-                            isTrue5 = true;
-                            if (AmbulantConfig.stupidMirosBirds.Value)
-                            {
-                                runOrig = false;
-                            }
-                        }
-                    }
                     var isTrue7 = false;
                     if (DizzyMechanicActive.TryGet((Player)realCreature, out var getdizzy))
                     {
@@ -974,8 +1090,12 @@ namespace Ambulant
                             isTrue7 = true;
                         }
                     }
-                    if (isTrue5)
+                    if (ScugHasAbility((Player)realCreature)[8])
                     {
+                        if (AmbulantConfig.stupidMirosBirds.Value)
+                        {
+                            runOrig = false;
+                        }
                         int num3 = 0;
                         while (num3 < realCreature.bodyChunks.Length && runOrig)
                         {
@@ -1063,15 +1183,7 @@ namespace Ambulant
         {
             // MARKER: Throw Fixed
             orig(self, shotBy, thrownPos, throwDir, force, eu);
-            var throwFixed1 = false;
-            if (shotBy is Player && ThrowFixed.TryGet((Player)shotBy, out var throwfixeed1))
-            {
-                if (throwfixeed1 == true)
-                {
-                    throwFixed1 = true;
-                }
-            }
-            if (throwFixed1)
+            if (shotBy is Player && ScugHasAbility((Player)shotBy)[13])
             {
                 self.changeDirCounter = 0;
             }
@@ -1079,15 +1191,7 @@ namespace Ambulant
         private void Weapon_Thrown(On.Weapon.orig_Thrown orig, Weapon self, Creature thrownBy, Vector2 thrownPos, Vector2? firstFrameTraceFromPos, RWCustom.IntVector2 throwDir, float frc, bool eu)
         {
             orig(self, thrownBy, thrownPos, firstFrameTraceFromPos, throwDir, frc, eu);
-            var throwFixed2 = false;
-            if (thrownBy is Player && ThrowFixed.TryGet((Player)thrownBy, out var throwfixeed2))
-            {
-                if (throwfixeed2 == true)
-                {
-                    throwFixed2 = true;
-                }
-            }
-            if (throwFixed2)
+            if (thrownBy is Player && ScugHasAbility((Player)thrownBy)[13])
             {
                 self.changeDirCounter = 0;
             }
