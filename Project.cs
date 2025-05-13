@@ -80,6 +80,7 @@ namespace Ambulant
             // fastcorridorclimb, funnyflip, escapeliz, escapemiros, fastcorrturn,
             // lessfastcorrturn, leechroll, maggotroll, throwfix, crawlturnroll
 
+            //
             // survivor
             new bool[] {false,false,false,true,true,
                             false,false,false,false,false,
@@ -92,10 +93,15 @@ namespace Ambulant
             new bool[] {false,false,false,false,false,
                             false,false,false,false,true,
                             true,false,true,true,false},
+            // watcher
+            new bool[] {false,false,false,true,false,
+                            true,true,false,false,false,
+                            false,true,true,true,false},
             // gourmand
             new bool[] {true,false,false,false,false,
                             false,true,false,false,false,
                             false,true,true,true,true},
+            //
             // artificer
             new bool[] {true,true,true,true,true,
                             false,true,false,false,true,
@@ -116,6 +122,7 @@ namespace Ambulant
             new bool[] {false,false,false,true,true,
                             false,false,false,false,true,
                             true,true,true,false,true},
+            //
             // vinki
             new bool[] {true,true,true,true,false,
                             false,true,false,true,true,
@@ -136,6 +143,7 @@ namespace Ambulant
             new bool[] {false,false,false,true,false,
                             false,false,false,false,true,
                             true,true,false,true,false},
+            //
             // gravel eater
             new bool[] {true,false,false,false,false,
                             false,true,false,true,false,
@@ -156,6 +164,7 @@ namespace Ambulant
             new bool[] {false,false,false,false,false,
                             false,true,false,false,true,
                             true,false,false,true,false},
+            //
             // snowflake (WintEnd)
             new bool[] {false,true,true,true,false,
                             true,true,false,false,true,
@@ -176,6 +185,46 @@ namespace Ambulant
             new bool[] {false,false,false,true,false,
                             false,false,false,false,true,
                             true,true,true,false,false},
+            //
+            // friend
+            new bool[] {false,false,false,false,false,
+                            false,false,false,false,true,
+                            true,true,false,false,false},
+            // noircatto
+            new bool[] {false,false,true,false,false,
+                            false,false,false,false,true,
+                            false,true,true,false,false},
+            // sacrifice
+            new bool[] {false,false,true,false,false,
+                            false,false,false,true,false,
+                            false,false,false,false,false},
+            // executioner
+            new bool[] {false,false,false,true,false,
+                            false,false,false,false,true,
+                            true,true,true,true,false},
+            // hermit
+            new bool[] {false,false,false,true,false,
+                            false,false,false,true,false,
+                            false,true,true,false,true},
+            //
+            // beacon
+            new bool[] {false,false,false,true,false,
+                            false,false,false,true,true,
+                            true,false,true,false,false},
+            // impossible
+            new bool[] {false,false,false,true,false,
+                            false,false,false,false,false,
+                            false,true,true,false,true},
+            // wingcat
+            new bool[] {true,true,false,false,false,
+                            false,false,false,false,false,
+                            false,true,false,false,false},
+            // guide
+            new bool[] {true,false,false,false,false,
+                            false,false,false,false,false,
+                            false,false,true,false,true},
+            //
+            //
             // placeholder
             new bool[] {false,false,false,false,false,
                             false,false,false,false,false,
@@ -191,11 +240,13 @@ namespace Ambulant
         };
 
         public static readonly string[] ScugBalanceIDs = new string[] {
-            "White", "Yellow", "Red", "Gourmand", "Artificer",
-            "Spearmaster", "Rivulet", "Saint", "Inv", "vinki",
-            "Pearlcat", "bee", "Mariner", "The Nightmare", "Gravelslug",
-            "Cloudtail", "NCRunbound", "NCREntropy", "NCRMarauder", "SnowflakeCat",
-            "Murderer", "Bombardier", "Incandescent", "Seer"
+            "White", "Yellow", "Red", "Watcher", "Gourmand",
+            "Artificer", "Spearmaster", "Rivulet", "Saint", "Inv",
+            "vinki", "Pearlcat", "bee", "Mariner", "The Nightmare",
+            "Gravelslug", "Cloudtail", "NCRunbound", "NCREntropy", "NCRMarauder",
+            "SnowflakeCat", "Murderer", "Bombardier", "Incandescent", "Seer",
+            "Friend", "noircatto", "Sacrifice", "Executioner", "Hermit",
+            "Beacon", "Impossible", "MMWingcat", "Guide"
         };
 
         private static bool[] ScugHasAbility(Player self)
@@ -211,7 +262,7 @@ namespace Ambulant
             Plugin.Log(LogLevel.Info, self.SlugCatClass.value);
             for (var a = 0; a < ScugBalanceIDs.Length; a++)
             {
-                if (ScugBalanceIDs[a] == self.SlugCatClass.value)
+                if ((ScugBalanceIDs[a]).ToLower() == (self.SlugCatClass.value).ToLower())
                 {
                     coolIndex = a;
                     break;
@@ -465,6 +516,21 @@ namespace Ambulant
             room.InGameNoise(new Noise.InGameNoise(pos, 9000f, self, 1f));
         }
 
+        private void ThrowEffects(Player self)
+        {
+            if (self.GetCustomData().dizziness > 400)
+            {
+                self.Stun(60);
+                self.GetCustomData().throwBoostCool = 160;
+            }
+            else
+            {
+                self.GetCustomData().throwBoostCool = 80;
+            }
+            self.GetCustomData().dizziness = Math.Min(self.GetCustomData().dizziness + 40, 500);
+            self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 80);
+        }
+
         //public static readonly ConditionalWeakTable<AbstractCreature, GeneralCWT> CWT = new();
         //public static GeneralCWT GetGeneral(this Player crit) => CWT.GetValue(crit.abstractCreature, _ => new GeneralCWT(crit.abstractCreature));
 
@@ -708,17 +774,7 @@ namespace Ambulant
                     {
                         if (self.input[0].thrw && self.grasps[0] == null && self.grasps[1] == null && self.bodyMode == Player.BodyModeIndex.Default)
                         {
-                            if (self.GetCustomData().dizziness > 400)
-                            {
-                                self.Stun(60);
-                                self.GetCustomData().throwBoostCool = 160;
-                            }
-                            else
-                            {
-                                self.GetCustomData().throwBoostCool = 80;
-                            }
-                            self.GetCustomData().dizziness = Math.Min(self.GetCustomData().dizziness + 40, 500);
-                            self.GetCustomData().timeUntilUndizzy = Math.Max(self.GetCustomData().timeUntilUndizzy, 80);
+                            ThrowEffects(self);
                             Vector2 dirr = new Vector2(self.ThrowDirection, 0);
                             if (self.input[0].y < 0.8)
                             {
@@ -1191,9 +1247,16 @@ namespace Ambulant
         private void Weapon_Thrown(On.Weapon.orig_Thrown orig, Weapon self, Creature thrownBy, Vector2 thrownPos, Vector2? firstFrameTraceFromPos, RWCustom.IntVector2 throwDir, float frc, bool eu)
         {
             orig(self, thrownBy, thrownPos, firstFrameTraceFromPos, throwDir, frc, eu);
-            if (thrownBy is Player && ScugHasAbility((Player)thrownBy)[13])
+            if (thrownBy is Player)
             {
-                self.changeDirCounter = 0;
+                if (ScugHasAbility((Player)thrownBy)[13])
+                {
+                    self.changeDirCounter = 0;
+                }
+                if (AdditionalTech.TryGet(thrownBy as Player, out var additiontech) && additiontech == true)
+                {
+                    ThrowEffects((Player)thrownBy);
+                }
             }
         }
         private int Player_ThrowDirection(Func<Player, int> orig, Player self)
